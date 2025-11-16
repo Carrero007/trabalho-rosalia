@@ -1,0 +1,39 @@
+[
+  {
+    "ContainingType": "rosalia.Controllers.ClientesController",
+    "Method": "Cadastrar",
+    "RelativePath": "Clientes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cli",
+        "Type": "rosalia.Clientes",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "rosalia.Controllers.ClientesController",
+    "Method": "BuscarClientes",
+    "RelativePath": "Clientes/buscar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filtro",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "texto",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -1,0 +1,152 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{122BDA31-858D-4B9A-8DF1-F0FAC367CAFC}|rosalia\\rosalia.csproj|c:\\users\\fullgamers\\downloads\\rosalia\\rosalia\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{122BDA31-858D-4B9A-8DF1-F0FAC367CAFC}|rosalia\\rosalia.csproj|solutionrelative:rosalia\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SistemaClientes/True/SqlTable/dbo.DETALHES_PF_PJ.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{122BDA31-858D-4B9A-8DF1-F0FAC367CAFC}|rosalia\\rosalia.csproj|c:\\users\\fullgamers\\downloads\\rosalia\\rosalia\\clientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{122BDA31-858D-4B9A-8DF1-F0FAC367CAFC}|rosalia\\rosalia.csproj|solutionrelative:rosalia\\clientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{122BDA31-858D-4B9A-8DF1-F0FAC367CAFC}|rosalia\\rosalia.csproj|c:\\users\\fullgamers\\downloads\\rosalia\\rosalia\\htmlpage.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{122BDA31-858D-4B9A-8DF1-F0FAC367CAFC}|rosalia\\rosalia.csproj|solutionrelative:rosalia\\htmlpage.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{122BDA31-858D-4B9A-8DF1-F0FAC367CAFC}|rosalia\\rosalia.csproj|c:\\users\\fullgamers\\downloads\\rosalia\\rosalia\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{122BDA31-858D-4B9A-8DF1-F0FAC367CAFC}|rosalia\\rosalia.csproj|solutionrelative:rosalia\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{122BDA31-858D-4B9A-8DF1-F0FAC367CAFC}|rosalia\\rosalia.csproj|c:\\users\\fullgamers\\downloads\\rosalia\\rosalia\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{122BDA31-858D-4B9A-8DF1-F0FAC367CAFC}|rosalia\\rosalia.csproj|solutionrelative:rosalia\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{122BDA31-858D-4B9A-8DF1-F0FAC367CAFC}|rosalia\\rosalia.csproj|c:\\users\\fullgamers\\downloads\\rosalia\\rosalia\\rosalia.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{122BDA31-858D-4B9A-8DF1-F0FAC367CAFC}|rosalia\\rosalia.csproj|solutionrelative:rosalia\\rosalia.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SistemaClientes/True/SqlTable/dbo.CLIENTE.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\rosalia\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "rosalia\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\rosalia\\Properties\\launchSettings.json",
+              "RelativeToolTip": "rosalia\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAawAYAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-16T18:54:56.897Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "dbo.DETALHES_PF_PJ [Dados]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SistemaClientes/True/SqlTable/dbo.DETALHES_PF_PJ.sql",
+              "ToolTip": "dbo.DETALHES_PF_PJ [Dados]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-11-16T18:43:30.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "dbo.CLIENTE [Dados]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/SistemaClientes/True/SqlTable/dbo.CLIENTE.sql",
+              "ToolTip": "dbo.CLIENTE [Dados]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-11-16T18:33:09.008Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ClientesController.cs",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\rosalia\\Controllers\\ClientesController.cs",
+              "RelativeDocumentMoniker": "rosalia\\Controllers\\ClientesController.cs",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\rosalia\\Controllers\\ClientesController.cs",
+              "RelativeToolTip": "rosalia\\Controllers\\ClientesController.cs",
+              "ViewState": "AgIAAHkAAAAAAAAAAAAuwIsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T18:17:39.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Clientes.cs",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\rosalia\\Clientes.cs",
+              "RelativeDocumentMoniker": "rosalia\\Clientes.cs",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\rosalia\\Clientes.cs",
+              "RelativeToolTip": "rosalia\\Clientes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T18:16:11.305Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "htmlpage.html",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\rosalia\\htmlpage.html",
+              "RelativeDocumentMoniker": "rosalia\\htmlpage.html",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\rosalia\\htmlpage.html",
+              "RelativeToolTip": "rosalia\\htmlpage.html",
+              "ViewState": "AgIAANkCAAAAAAAAAAAAAOUCAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-11-16T18:08:13.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "rosalia.http",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\rosalia\\rosalia.http",
+              "RelativeDocumentMoniker": "rosalia\\rosalia.http",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\rosalia\\rosalia.http",
+              "RelativeToolTip": "rosalia\\rosalia.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-11-16T18:08:13.446Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\rosalia\\Program.cs",
+              "RelativeDocumentMoniker": "rosalia\\Program.cs",
+              "ToolTip": "C:\\Users\\FULLGAMERS\\Downloads\\rosalia\\rosalia\\Program.cs",
+              "RelativeToolTip": "rosalia\\Program.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAYwCQAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T18:08:13.511Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
