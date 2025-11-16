@@ -1,0 +1,71 @@
+CREATE DATABASE SistemaClientes;
+
+CREATE TABLE CLIENTE (
+    Id_Cliente INT IDENTITY(1,1) PRIMARY KEY,
+
+    Tipo_Cliente VARCHAR(2) NOT NULL,  -- PF ou PJ
+    Nome_RazaoSocial VARCHAR(150) NOT NULL,
+    Email VARCHAR(120) NOT NULL,
+    Telefone VARCHAR(20) NOT NULL,
+    Endereco VARCHAR(200) NULL
+);
+
+CREATE TABLE DETALHES_PF_PJ (
+    Id_Detalhes INT IDENTITY(1,1) PRIMARY KEY,
+    Id_Cliente INT NOT NULL UNIQUE,  -- Relacionamento 1:1
+
+    -- Dados PF
+    CPF VARCHAR(14) NULL,
+    RG VARCHAR(20) NULL,
+    Data_Nascimento DATE NULL,
+
+    -- Dados PJ
+    CNPJ VARCHAR(18) NULL,
+    Inscricao_Estadual VARCHAR(20) NULL,
+    Nome_Responsavel VARCHAR(150) NULL,
+    Data_Abertura DATE NULL,
+
+    CONSTRAINT FK_Cliente_Detalhes
+        FOREIGN KEY (Id_Cliente) REFERENCES CLIENTE(Id_Cliente)
+);
+
+CREATE UNIQUE INDEX UQ_DETALHES_CPF
+ON DETALHES_PF_PJ (CPF)
+WHERE CPF IS NOT NULL;
+
+CREATE UNIQUE INDEX UQ_DETALHES_CNPJ
+ON DETALHES_PF_PJ (CNPJ)
+WHERE CNPJ IS NOT NULL;
+
+
+-- PF 1
+INSERT INTO CLIENTE (Tipo_Cliente, Nome_RazaoSocial, Email, Telefone, Endereco)
+VALUES ('PF', 'Ana Maria Silva', 'ana@gmail.com', '(11)90000-1111', 'Rua A, 123');
+
+INSERT INTO DETALHES_PF_PJ (Id_Cliente, CPF, RG, Data_Nascimento)
+VALUES (1, '123.456.789-00', '12.345.678-9', '1995-04-10');
+
+
+-- PF 2
+INSERT INTO CLIENTE (Tipo_Cliente, Nome_RazaoSocial, Email, Telefone, Endereco)
+VALUES ('PF', 'Carlos Pereira', 'carlos@gmail.com', '(21)98888-2222', 'Av B, 450');
+
+INSERT INTO DETALHES_PF_PJ (Id_Cliente, CPF, RG, Data_Nascimento)
+VALUES (2, '987.654.321-11', '98.765.432-1', '1988-12-15');
+
+
+
+-- PJ 1
+INSERT INTO CLIENTE (Tipo_Cliente, Nome_RazaoSocial, Email, Telefone, Endereco)
+VALUES ('PJ', 'Tech Solutions LTDA', 'contato@tech.com', '(11)95555-3333', 'Rua das Flores, 789');
+
+INSERT INTO DETALHES_PF_PJ (Id_Cliente, CNPJ, Inscricao_Estadual, Nome_Responsavel, Data_Abertura)
+VALUES (3, '11.222.333/0001-44', '123456789000', 'João Mendes', '2015-08-20');
+
+
+-- PJ 2
+INSERT INTO CLIENTE (Tipo_Cliente, Nome_RazaoSocial, Email, Telefone, Endereco)
+VALUES ('PJ', 'Super Market ME', 'contato@supermarket.com', '(31)97777-4444', 'Av Central, 500');
+
+INSERT INTO DETALHES_PF_PJ (Id_Cliente, CNPJ, Inscricao_Estadual, Nome_Responsavel, Data_Abertura)
+VALUES (4, '55.666.777/0001-88', '998877665544', 'Mariana Costa', '2020-03-15');
