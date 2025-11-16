@@ -367,6 +367,94 @@
                 content: '...';
             }
         }
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+            .modal.active {
+                display: flex;
+                animation: fadeIn 0.3s ease-out;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1e293b, #334155);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #38bdf8;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #334155;
+        }
+
+            .modal-header h2 {
+                margin: 0;
+            }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: #ef4444;
+            font-size: 30px;
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+            .modal-close:hover {
+                background: rgba(239, 68, 68, 0.1);
+                transform: rotate(90deg);
+            }
     </style>
 </head>
 <body>
@@ -507,71 +595,468 @@
                 <div class="loading">Carregando clientes</div>
             </div>
         </div>
+        <!-- MODAL DE EDIÇÃO -->
+        <div id="modalEdicao" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>✏️ Editar Cliente</h2>
+                    <button class="modal-close" onclick="fecharModal()">×</button>
+                </div>
+
+                <div id="mensagemModal"></div>
+
+                <form id="formEdicao" onsubmit="salvarEdicao(event)">
+                    <input type="hidden" id="editId">
+
+                    <div class="tipo-cliente">
+                        <label>
+                            <input type="radio" name="tipoClienteEdit" value="PF" onchange="alterarTipoEdit()">
+                            <strong>Pessoa Física (PF)</strong>
+                        </label>
+                        <label>
+                            <input type="radio" name="tipoClienteEdit" value="PJ" onchange="alterarTipoEdit()">
+                            <strong>Pessoa Jurídica (PJ)</strong>
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label id="labelNomeEdit">Nome Completo *</label>
+                            <input type="text" id="nomeEdit" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>E-mail *</label>
+                            <input type="email" id="emailEdit" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Telefone *</label>
+                            <input type="tel" id="telefoneEdit" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Endereço</label>
+                            <input type="text" id="enderecoEdit">
+                        </div>
+                    </div>
+
+                    <!-- Campos Pessoa Física -->
+                    <div id="camposPFEdit" class="campos-especificos">
+                        <h3 style="margin: 25px 0 15px;">Dados Pessoa Física</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>CPF *</label>
+                                <input type="text" id="cpfEdit" maxlength="14">
+                            </div>
+
+                            <div class="form-group">
+                                <label>RG</label>
+                                <input type="text" id="rgEdit">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Data de Nascimento *</label>
+                                <input type="date" id="dataNascimentoEdit">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campos Pessoa Jurídica -->
+                    <div id="camposPJEdit" class="campos-especificos">
+                        <h3 style="margin: 25px 0 15px;">Dados Pessoa Jurídica</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>CNPJ *</label>
+                                <input type="text" id="cnpjEdit" maxlength="18">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Inscrição Estadual</label>
+                                <input type="text" id="inscricaoEstadualEdit">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Nome do Responsável</label>
+                                <input type="text" id="nomeResponsavelEdit">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Data de Abertura</label>
+                                <input type="date" id="dataAberturaEdit">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 15px; margin-top: 30px;">
+                        <button type="submit" class="btn" id="btnSalvar">💾 Salvar Alterações</button>
+                        <button type="button" class="btn btn-secondary" onclick="fecharModal()">✗ Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Configuração da API C#
-        const API_URL = 'http://localhost:5000/api';
-        let todosClientes = [];
+    // Configuração da API C#
+    const API_URL = 'https://localhost:7060';
+    let todosClientes = [];
 
-        // Alterar campos conforme tipo de cliente
-        function alterarTipo() {
-            const tipo = document.querySelector('input[name="tipoCliente"]:checked').value;
-            const camposPF = document.getElementById('camposPF');
-            const camposPJ = document.getElementById('camposPJ');
-            const labelNome = document.getElementById('labelNome');
+    // Alterar campos conforme tipo de cliente
+    function alterarTipo() {
+    const tipo = document.querySelector('input[name="tipoCliente"]:checked').value;
+    const camposPF = document.getElementById('camposPF');
+    const camposPJ = document.getElementById('camposPJ');
+    const labelNome = document.getElementById('labelNome');
+
+    if (tipo === 'PF') {
+    camposPF.classList.add('active');
+    camposPJ.classList.remove('active');
+    labelNome.textContent = 'Nome Completo *';
+
+    document.getElementById('cpf').required = true;
+    document.getElementById('dataNascimento').required = true;
+    document.getElementById('cnpj').required = false;
+    } else {
+    camposPJ.classList.add('active');
+    camposPF.classList.remove('active');
+    labelNome.textContent = 'Razão Social *';
+
+    document.getElementById('cnpj').required = true;
+    document.getElementById('cpf').required = false;
+    document.getElementById('dataNascimento').required = false;
+    }
+    }
+
+    // Cadastrar cliente
+    async function cadastrarCliente(event) {
+    event.preventDefault();
+
+    const btnCadastrar = document.getElementById('btnCadastrar');
+    btnCadastrar.disabled = true;
+    btnCadastrar.textContent = 'Cadastrando...';
+
+    const tipo = document.querySelector('input[name="tipoCliente"]:checked').value;
+
+    // Corrigido: sempre enviar todos os campos
+    const dados = {
+    tipo: tipo,
+    nome: document.getElementById('nome').value,
+    email: document.getElementById('email').value,
+    telefone: document.getElementById('telefone').value,
+    endereco: document.getElementById('endereco').value || null,
+    // Campos PF
+    cpf: null,
+    rg: null,
+    dataNascimento: null,
+    // Campos PJ
+    cnpj: null,
+    inscricaoEstadual: null,
+    nomeResponsavel: null,
+    dataAbertura: null
+    };
+
+    if (tipo === 'PF') {
+    dados.cpf = document.getElementById('cpf').value || null;
+    dados.rg = document.getElementById('rg').value || null;
+    dados.dataNascimento = document.getElementById('dataNascimento').value || null;
+    } else {
+    dados.cnpj = document.getElementById('cnpj').value || null;
+    dados.inscricaoEstadual = document.getElementById('inscricaoEstadual').value || null;
+    dados.nomeResponsavel = document.getElementById('nomeResponsavel').value || null;
+    dados.dataAbertura = document.getElementById('dataAbertura').value || null;
+    }
+
+    // Log para debug
+    console.log('Dados enviados:', dados);
+
+    try {
+    const response = await fetch(`${API_URL}/clientes`, {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dados)
+    });
+
+    const resultado = await response.json();
+    console.log('Resposta da API:', resultado);
+
+    if (response.ok) {
+    mostrarMensagem(resultado.mensagem || '✅ Cliente cadastrado com sucesso!', 'success');
+    limparFormulario();
+    } else {
+    mostrarMensagem(resultado.erro || 'Erro ao cadastrar cliente', 'error');
+    }
+    } catch (erro) {
+    console.error('Erro completo:', erro);
+    mostrarMensagem('Erro ao conectar com o servidor. Verifique se a API está rodando em https://localhost:7060', 'error');
+    } finally {
+    btnCadastrar.disabled = false;
+    btnCadastrar.textContent = '✓ Cadastrar Cliente';
+    }
+    }
+
+    // Carregar clientes do banco de dados
+    async function carregarClientes() {
+    const lista = document.getElementById('listaClientes');
+    lista.innerHTML = '<div class="loading">Carregando clientes</div>';
+
+    const filtroTipo = document.getElementById('filtroTipo').value;
+    const buscaTexto = document.getElementById('busca').value || '';
+
+    // Corrigido para usar o endpoint correto
+    const url = `${API_URL}/clientes/buscar?filtro=${filtroTipo}&texto=${encodeURIComponent(buscaTexto)}`;
+
+    try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+    throw new Error('Erro ao carregar clientes');
+    }
+
+    todosClientes = await response.json();
+    exibirClientes(todosClientes);
+    } catch (erro) {
+    console.error('Erro ao carregar clientes:', erro);
+    lista.innerHTML = `
+    <div class="alert alert-error">
+        ⚠️ Erro ao carregar clientes. Verifique se a API está rodando em ${API_URL}
+    </div>
+    `;
+    }
+    }
+
+    // Exibir clientes
+    function exibirClientes(clientes) {
+    const lista = document.getElementById('listaClientes');
+
+    if (clientes.length === 0) {
+    lista.innerHTML = '<div class="alert alert-info">📋 Nenhum cliente cadastrado.</div>';
+    return;
+    }
+
+    lista.innerHTML = clientes.map(cliente => {
+    const dataNasc = cliente.Data_Nascimento
+    ? new Date(cliente.Data_Nascimento).toLocaleDateString('pt-BR')
+    : 'N/A';
+    const dataAbert = cliente.Data_Abertura
+    ? new Date(cliente.Data_Abertura).toLocaleDateString('pt-BR')
+    : 'N/A';
+
+    return `
+    <div class="cliente-card">
+        <div class="cliente-header">
+            <div class="cliente-nome">${cliente.Nome_RazaoSocial}</div>
+            <span class="cliente-tipo tipo-${cliente.Tipo_Cliente.toLowerCase()}">${cliente.Tipo_Cliente}</span>
+        </div>
+        <div class="cliente-info">
+            ${cliente.Tipo_Cliente === 'PF' ? `
+            <div class="info-item">
+                <span class="info-label">CPF:</span> ${cliente.CPF}
+            </div>
+            <div class="info-item">
+                <span class="info-label">RG:</span> ${cliente.RG || 'N/A'}
+            </div>
+            <div class="info-item">
+                <span class="info-label">Nascimento:</span> ${dataNasc}
+            </div>
+            ` : `
+            <div class="info-item">
+                <span class="info-label">CNPJ:</span> ${cliente.CNPJ}
+            </div>
+            <div class="info-item">
+                <span class="info-label">IE:</span> ${cliente.Inscricao_Estadual || 'N/A'}
+            </div>
+            <div class="info-item">
+                <span class="info-label">Responsável:</span> ${cliente.Nome_Responsavel || 'N/A'}
+            </div>
+            <div class="info-item">
+                <span class="info-label">Abertura:</span> ${dataAbert}
+            </div>
+            `}
+            <div class="info-item">
+                <span class="info-label">E-mail:</span> ${cliente.Email}
+            </div>
+            <div class="info-item">
+                <span class="info-label">Telefone:</span> ${cliente.Telefone}
+            </div>
+            <div class="info-item" style="grid-column: 1/-1;">
+                        <span class="info-label">Endereço:</span> ${cliente.Endereco || 'N/A'}
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 2px solid #334155;">
+                    <button class="btn" style="flex: 1; padding: 12px;" onclick="editarCliente(${cliente.Id_Cliente})">
+                        ✏️ Editar
+                    </button>
+                    <button class="btn btn-secondary" style="flex: 1; padding: 12px; background: linear-gradient(145deg, #dc2626, #ef4444);" onclick="excluirCliente(${cliente.Id_Cliente}, '${cliente.Nome_RazaoSocial}')">
+                        🗑️ Excluir
+                    </button>
+                </div>
+            </div>
+        `;;
+    }).join('');
+    }
+
+    // Filtrar clientes (agora chama a API)
+    function filtrarClientesLocal() {
+    carregarClientes(); // Recarrega usando o texto de busca
+    }
+
+    // Mostrar mensagem
+    function mostrarMensagem(texto, tipo) {
+    const mensagem = document.getElementById('mensagem');
+    mensagem.innerHTML = `<div class="alert alert-${tipo}">${texto}</div>`;
+
+    setTimeout(() => {
+    mensagem.innerHTML = '';
+    }, 5000);
+    }
+
+    // Limpar formulário
+    function limparFormulario() {
+    document.getElementById('formCliente').reset();
+    alterarTipo();
+    }
+
+    // Abrir tab
+    function abrirTab(tab) {
+    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+    event.target.classList.add('active');
+    document.getElementById(tab).classList.add('active');
+
+    if (tab === 'listagem') {
+    carregarClientes();
+    }
+        }
+
+        // Alterar tipo no modal de edição
+        function alterarTipoEdit() {
+            const tipo = document.querySelector('input[name="tipoClienteEdit"]:checked').value;
+            const camposPF = document.getElementById('camposPFEdit');
+            const camposPJ = document.getElementById('camposPJEdit');
+            const labelNome = document.getElementById('labelNomeEdit');
 
             if (tipo === 'PF') {
                 camposPF.classList.add('active');
                 camposPJ.classList.remove('active');
                 labelNome.textContent = 'Nome Completo *';
 
-                document.getElementById('cpf').required = true;
-                document.getElementById('dataNascimento').required = true;
-                document.getElementById('cnpj').required = false;
+                document.getElementById('cpfEdit').required = true;
+                document.getElementById('dataNascimentoEdit').required = true;
+                document.getElementById('cnpjEdit').required = false;
             } else {
                 camposPJ.classList.add('active');
                 camposPF.classList.remove('active');
                 labelNome.textContent = 'Razão Social *';
 
-                document.getElementById('cnpj').required = true;
-                document.getElementById('cpf').required = false;
-                document.getElementById('dataNascimento').required = false;
+                document.getElementById('cnpjEdit').required = true;
+                document.getElementById('cpfEdit').required = false;
+                document.getElementById('dataNascimentoEdit').required = false;
             }
         }
 
-        // Cadastrar cliente
-        async function cadastrarCliente(event) {
+        // Abrir modal de edição
+        async function editarCliente(id) {
+            try {
+                // Buscar dados do cliente
+                const response = await fetch(`${API_URL}/clientes/buscar?filtro=TODOS&texto=`);
+                const clientes = await response.json();
+                const cliente = clientes.find(c => c.Id_Cliente === id);
+
+                if (!cliente) {
+                    alert('Cliente não encontrado!');
+                    return;
+                }
+
+                // Preencher formulário
+                document.getElementById('editId').value = cliente.Id_Cliente;
+                document.getElementById('nomeEdit').value = cliente.Nome_RazaoSocial;
+                document.getElementById('emailEdit').value = cliente.Email;
+                document.getElementById('telefoneEdit').value = cliente.Telefone;
+                document.getElementById('enderecoEdit').value = cliente.Endereco || '';
+
+                // Selecionar tipo
+                const radioTipo = document.querySelector(`input[name="tipoClienteEdit"][value="${cliente.Tipo_Cliente}"]`);
+                if (radioTipo) radioTipo.checked = true;
+
+                if (cliente.Tipo_Cliente === 'PF') {
+                    document.getElementById('cpfEdit').value = cliente.CPF || '';
+                    document.getElementById('rgEdit').value = cliente.RG || '';
+                    document.getElementById('dataNascimentoEdit').value = cliente.Data_Nascimento
+                        ? cliente.Data_Nascimento.split('T')[0]
+                        : '';
+                } else {
+                    document.getElementById('cnpjEdit').value = cliente.CNPJ || '';
+                    document.getElementById('inscricaoEstadualEdit').value = cliente.Inscricao_Estadual || '';
+                    document.getElementById('nomeResponsavelEdit').value = cliente.Nome_Responsavel || '';
+                    document.getElementById('dataAberturaEdit').value = cliente.Data_Abertura
+                        ? cliente.Data_Abertura.split('T')[0]
+                        : '';
+                }
+
+                alterarTipoEdit();
+
+                // Abrir modal
+                document.getElementById('modalEdicao').classList.add('active');
+            } catch (erro) {
+                console.error('Erro ao carregar dados:', erro);
+                alert('Erro ao carregar dados do cliente');
+            }
+        }
+
+        // Fechar modal
+        function fecharModal() {
+            document.getElementById('modalEdicao').classList.remove('active');
+            document.getElementById('mensagemModal').innerHTML = '';
+        }
+
+        // Salvar edição
+        async function salvarEdicao(event) {
             event.preventDefault();
 
-            const btnCadastrar = document.getElementById('btnCadastrar');
-            btnCadastrar.disabled = true;
-            btnCadastrar.textContent = 'Cadastrando...';
+            const btnSalvar = document.getElementById('btnSalvar');
+            btnSalvar.disabled = true;
+            btnSalvar.textContent = 'Salvando...';
 
-            const tipo = document.querySelector('input[name="tipoCliente"]:checked').value;
+            const id = document.getElementById('editId').value;
+            const tipo = document.querySelector('input[name="tipoClienteEdit"]:checked').value;
 
             const dados = {
                 tipo: tipo,
-                nome: document.getElementById('nome').value,
-                email: document.getElementById('email').value,
-                telefone: document.getElementById('telefone').value,
-                endereco: document.getElementById('endereco').value || null
+                nome: document.getElementById('nomeEdit').value,
+                email: document.getElementById('emailEdit').value,
+                telefone: document.getElementById('telefoneEdit').value,
+                endereco: document.getElementById('enderecoEdit').value || null,
+                cpf: null,
+                rg: null,
+                dataNascimento: null,
+                cnpj: null,
+                inscricaoEstadual: null,
+                nomeResponsavel: null,
+                dataAbertura: null
             };
 
             if (tipo === 'PF') {
-                dados.cpf = document.getElementById('cpf').value;
-                dados.rg = document.getElementById('rg').value || null;
-                dados.dataNascimento = document.getElementById('dataNascimento').value || null;
+                dados.cpf = document.getElementById('cpfEdit').value || null;
+                dados.rg = document.getElementById('rgEdit').value || null;
+                dados.dataNascimento = document.getElementById('dataNascimentoEdit').value || null;
             } else {
-                dados.cnpj = document.getElementById('cnpj').value;
-                dados.inscricaoEstadual = document.getElementById('inscricaoEstadual').value || null;
-                dados.nomeResponsavel = document.getElementById('nomeResponsavel').value || null;
-                dados.dataAbertura = document.getElementById('dataAbertura').value || null;
+                dados.cnpj = document.getElementById('cnpjEdit').value || null;
+                dados.inscricaoEstadual = document.getElementById('inscricaoEstadualEdit').value || null;
+                dados.nomeResponsavel = document.getElementById('nomeResponsavelEdit').value || null;
+                dados.dataAbertura = document.getElementById('dataAberturaEdit').value || null;
             }
 
             try {
-                const response = await fetch(`${API_URL}/clientes`, {
-                    method: 'POST',
+                const response = await fetch(`${API_URL}/clientes/${id}`, {
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -581,164 +1066,52 @@
                 const resultado = await response.json();
 
                 if (response.ok) {
-                    mostrarMensagem(resultado.mensagem, 'success');
-                    limparFormulario();
+                    mostrarMensagem('✅ Cliente atualizado com sucesso!', 'success');
+                    fecharModal();
+                    carregarClientes();
                 } else {
-                    mostrarMensagem(resultado.erro || 'Erro ao cadastrar cliente', 'error');
+                    document.getElementById('mensagemModal').innerHTML =
+                        `<div class="alert alert-error">${resultado.erro || 'Erro ao atualizar'}</div>`;
                 }
             } catch (erro) {
                 console.error('Erro:', erro);
-                mostrarMensagem('Erro ao conectar com o servidor. Verifique se a API está rodando.', 'error');
+                document.getElementById('mensagemModal').innerHTML =
+                    `<div class="alert alert-error">Erro ao conectar com o servidor</div>`;
             } finally {
-                btnCadastrar.disabled = false;
-                btnCadastrar.textContent = '✓ Cadastrar Cliente';
+                btnSalvar.disabled = false;
+                btnSalvar.textContent = '💾 Salvar Alterações';
             }
         }
 
-        // Carregar clientes do banco de dados
-        async function carregarClientes() {
-            const lista = document.getElementById('listaClientes');
-            lista.innerHTML = '<div class="loading">Carregando clientes</div>';
-
-            const filtroTipo = document.getElementById('filtroTipo').value;
-            const url = filtroTipo === 'TODOS'
-                ? `${API_URL}/clientes`
-                : `${API_URL}/clientes/filtrar/${filtroTipo}`;
+        // Excluir cliente
+        async function excluirCliente(id, nome) {
+            if (!confirm(`⚠️ Tem certeza que deseja excluir o cliente "${nome}"?\n\nEsta ação não pode ser desfeita!`)) {
+                return;
+            }
 
             try {
-                const response = await fetch(url);
+                const response = await fetch(`${API_URL}/clientes/${id}`, {
+                    method: 'DELETE'
+                });
 
-                if (!response.ok) {
-                    throw new Error('Erro ao carregar clientes');
+                const resultado = await response.json();
+
+                if (response.ok) {
+                    mostrarMensagem('🗑️ Cliente excluído com sucesso!', 'success');
+                    carregarClientes();
+                } else {
+                    mostrarMensagem(resultado.erro || 'Erro ao excluir cliente', 'error');
                 }
-
-                todosClientes = await response.json();
-                exibirClientes(todosClientes);
             } catch (erro) {
-                console.error('Erro ao carregar clientes:', erro);
-                lista.innerHTML = `
-                    <div class="alert alert-error">
-                        ⚠️ Erro ao carregar clientes. Verifique se a API está rodando em ${API_URL}
-                    </div>
-                `;
+                console.error('Erro:', erro);
+                mostrarMensagem('Erro ao conectar com o servidor', 'error');
             }
         }
 
-        // Exibir clientes
-        function exibirClientes(clientes) {
-            const lista = document.getElementById('listaClientes');
-
-            if (clientes.length === 0) {
-                lista.innerHTML = '<div class="alert alert-info">📋 Nenhum cliente cadastrado.</div>';
-                return;
-            }
-
-            lista.innerHTML = clientes.map(cliente => {
-                const dataNasc = cliente.Data_Nascimento
-                    ? new Date(cliente.Data_Nascimento).toLocaleDateString('pt-BR')
-                    : 'N/A';
-                const dataAbert = cliente.Data_Abertura
-                    ? new Date(cliente.Data_Abertura).toLocaleDateString('pt-BR')
-                    : 'N/A';
-
-                return `
-                    <div class="cliente-card">
-                        <div class="cliente-header">
-                            <div class="cliente-nome">${cliente.Nome_RazaoSocial}</div>
-                            <span class="cliente-tipo tipo-${cliente.Tipo_Cliente.toLowerCase()}">${cliente.Tipo_Cliente}</span>
-                        </div>
-                        <div class="cliente-info">
-                            ${cliente.Tipo_Cliente === 'PF' ? `
-                                <div class="info-item">
-                                    <span class="info-label">CPF:</span> ${cliente.CPF}
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">RG:</span> ${cliente.RG || 'N/A'}
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Nascimento:</span> ${dataNasc}
-                                </div>
-                            ` : `
-                                <div class="info-item">
-                                    <span class="info-label">CNPJ:</span> ${cliente.CNPJ}
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">IE:</span> ${cliente.Inscricao_Estadual || 'N/A'}
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Responsável:</span> ${cliente.Nome_Responsavel || 'N/A'}
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Abertura:</span> ${dataAbert}
-                                </div>
-                            `}
-                            <div class="info-item">
-                                <span class="info-label">E-mail:</span> ${cliente.Email}
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Telefone:</span> ${cliente.Telefone}
-                            </div>
-                            <div class="info-item" style="grid-column: 1/-1;">
-                                <span class="info-label">Endereço:</span> ${cliente.Endereco || 'N/A'}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Filtrar clientes localmente (busca)
-        function filtrarClientesLocal() {
-            const busca = document.getElementById('busca').value.toLowerCase();
-
-            if (!busca) {
-                exibirClientes(todosClientes);
-                return;
-            }
-
-            const clientesFiltrados = todosClientes.filter(c =>
-                c.Nome_RazaoSocial.toLowerCase().includes(busca) ||
-                (c.CPF && c.CPF.includes(busca)) ||
-                (c.CNPJ && c.CNPJ.includes(busca)) ||
-                c.Email.toLowerCase().includes(busca)
-            );
-
-            exibirClientes(clientesFiltrados);
-        }
-
-        // Mostrar mensagem
-        function mostrarMensagem(texto, tipo) {
-            const mensagem = document.getElementById('mensagem');
-            mensagem.innerHTML = `<div class="alert alert-${tipo}">${texto}</div>`;
-
-            setTimeout(() => {
-                mensagem.innerHTML = '';
-            }, 5000);
-        }
-
-        // Limpar formulário
-        function limparFormulario() {
-            document.getElementById('formCliente').reset();
-            alterarTipo();
-        }
-
-        // Abrir tab
-        function abrirTab(tab) {
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-            event.target.classList.add('active');
-            document.getElementById(tab).classList.add('active');
-
-            if (tab === 'listagem') {
-                carregarClientes();
-            }
-        }
-
-        // Inicializar
-        window.onload = function() {
-            alterarTipo();
-        };
+    // Inicializar
+    window.onload = function() {
+    alterarTipo();
+    };
     </script>
 </body>
 </html>
